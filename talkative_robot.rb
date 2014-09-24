@@ -1,3 +1,5 @@
+# require 'pry'
+
 puts "Greetings, Human!"
 
 puts "What is your name? "
@@ -23,6 +25,8 @@ end
 
 years = 75 - user_age
 puts "You will be 75 years old in #{years} years."
+
+# binding.pry
 
 user_name.upcase
 puts "Hey #{user_name}, where are you going!?"
