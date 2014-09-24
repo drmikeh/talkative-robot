@@ -1,33 +1,74 @@
-# require 'pry'
-
-puts "Greetings, Human!"
-
-puts "What is your name? "
-user_name = gets.chomp
-
-puts "What is your age? "
-user_age = gets.chomp.to_i
-
-puts "Hi #{user_name} who is #{user_age} years old!"
-
-first_initial = user_name[0]
-
-user_answer = ""
-while user_answer != "yes" && user_answer != "no"
-    puts "Do you mind if I call you #{first_initial} (yes or no)?"
-    user_answer = gets.chomp.downcase
-end
-if user_answer == "yes"
-    puts "Okay, I will not call you that."
-else
-    puts "Cool!"
+def print_greeting
+    puts "Greetings, Human!"
 end
 
-years = 75 - user_age
-puts "You will be 75 years old in #{years} years."
+def get_user_info
+    user = {}
+    puts "What is your name? "
+    user[:name] = gets.chomp
 
-# binding.pry
+    puts "What is your age? "
+    user[:age] = gets.chomp.to_i
+    user
+end
 
-user_name.upcase
-puts "Hey #{user_name}, where are you going!?"
-puts %s(Yo "Dude", what's up?)
+def print_friendly_greeting(user)
+    puts "Hi #{user[:name]} who is #{user[:age]} years old!"
+end
+
+def ask_user(question)
+    answer = ""
+    while answer != "yes" && answer != "no"
+        puts question
+        answer = gets.chomp.downcase
+    end
+    answer == "yes" ? true : false
+end
+
+def ask_user_about_nickname(user)
+    first_initial = user[:name].chars.first
+    answer = ask_user("Do you mind if I call you #{first_initial} (yes or no)?")
+    if answer
+        puts "Okay, I will not call you that."
+        user[:nickname] = user[:name]
+    else
+        puts "Cool, From now on I will call you #{first_initial}!"
+        user[:nickname] = first_initial
+    end
+end
+
+def print_age_based_message(user)
+    if user[:age] < 13
+        puts "You are not yet a teenager"
+    else
+        puts "You are a teenager" unless user[:age] > 19
+        puts "You can legally drink!" if user[:age] >= 21
+    end
+    years = 75 - user[:age]
+    puts "You will be 75 years old in #{years} years."
+end
+
+def do_grocery_shopping
+    groceries = ['milk', 'eggs', 'bacon', 'coffee', 'grits']
+    puts "Here is your grocery list: #{groceries}"
+    while groceries.length > 0
+        random_item = groceries.sample
+        answer = ask_user("Did you grab the #{random_item} (yes or no)? ")
+        if answer
+            groceries.delete(random_item)
+        end
+        puts "Now your grocery list is #{groceries}"
+    end
+end
+
+def print_farewell(user)
+    puts "Farewell #{user[:nickname]}!"
+end
+
+print_greeting
+the_user = get_user_info
+print_friendly_greeting(the_user)
+ask_user_about_nickname(the_user)
+print_age_based_message(the_user)
+do_grocery_shopping
+print_farewell(the_user)
