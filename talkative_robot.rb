@@ -51,14 +51,14 @@ end
 def do_grocery_shopping
     puts "== Let's go grocery shopping! =="
     groceries = ['milk', 'eggs', 'bacon', 'coffee', 'grits']
-    puts "Here is your grocery list: #{groceries}"
+    puts "Here is your grocery list: #{groceries.join(', ')}"
     while groceries.length > 0
         random_item = groceries.sample
         answer = ask_user?("Did you grab the #{random_item} (yes or no)? ")
         if answer
             groceries.delete(random_item)
         end
-        puts "Now your grocery list is #{groceries}"
+        puts "Now your grocery list is #{groceries.join(', ')}"
     end
 end
 
