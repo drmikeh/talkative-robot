@@ -16,7 +16,7 @@ def print_friendly_greeting(user)
     puts "Hi #{user[:name]} who is #{user[:age]} years old!"
 end
 
-def ask_user(question)
+def ask_user?(question)
     answer = ""
     while answer != "yes" && answer != "no"
         puts question
@@ -27,7 +27,7 @@ end
 
 def ask_user_about_nickname(user)
     first_initial = user[:name].chars.first
-    answer = ask_user("Do you mind if I call you #{first_initial} (yes or no)?")
+    answer = ask_user?("Do you mind if I call you #{first_initial} (yes or no)?")
     if answer
         puts "Okay, I will not call you that."
         user[:nickname] = user[:name]
@@ -49,11 +49,12 @@ def print_age_based_message(user)
 end
 
 def do_grocery_shopping
+    puts "== Let's go grocery shopping! =="
     groceries = ['milk', 'eggs', 'bacon', 'coffee', 'grits']
     puts "Here is your grocery list: #{groceries}"
     while groceries.length > 0
         random_item = groceries.sample
-        answer = ask_user("Did you grab the #{random_item} (yes or no)? ")
+        answer = ask_user?("Did you grab the #{random_item} (yes or no)? ")
         if answer
             groceries.delete(random_item)
         end
