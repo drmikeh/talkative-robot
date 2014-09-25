@@ -50,7 +50,8 @@ end
 
 def do_grocery_shopping
     puts "== Let's go grocery shopping! =="
-    groceries = ['milk', 'eggs', 'bacon', 'coffee', 'grits']
+    groceries = IO.read("groceries.txt").split(',')
+    puts "You have #{groceries.length} items in your grocery list."
     puts "Here is your grocery list: #{groceries.join(', ')}"
     while groceries.length > 0
         random_item = groceries.sample
