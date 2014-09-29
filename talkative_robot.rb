@@ -2,51 +2,76 @@ def print_greeting
     puts "Greetings, Human!"
 end
 
-def get_user_info
-    user = {}
-    puts "What is your name? "
-    user[:name] = gets.chomp
-
-    puts "What is your age? "
-    user[:age] = gets.chomp.to_i
-    user
-end
-
-def print_friendly_greeting(user)
-    puts "Hi #{user[:name]} who is #{user[:age]} years old!"
-end
-
 def ask_user?(question)
     answer = ""
     while answer != "yes" && answer != "no"
         puts question
         answer = gets.chomp.downcase
+        if answer == "y"
+            answer = "yes"
+        elsif answer == "n"
+            answer = "no"
+        end
     end
     answer == "yes" ? true : false
 end
 
-def ask_user_about_nickname(user)
-    first_initial = user[:name].chars.first
-    answer = ask_user?("Do you mind if I call you #{first_initial} (yes or no)?")
-    if answer
-        puts "Okay, I will not call you that."
-        user[:nickname] = user[:name]
-    else
-        puts "Cool, From now on I will call you #{first_initial}!"
-        user[:nickname] = first_initial
+class User
+
+    attr_accessor :name, :age
+
+    def initialize(args)
+        @name = args[:name]
+        @age = args[:age]
+    end
+
+    # def self.get_user_info
+    def self.get_user_info
+        user = {}
+        puts "What is your name? "
+        user[:name] = gets.chomp
+
+        puts "What is your age? "
+        user[:age] = gets.chomp.to_i
+        user
+    end
+
+    def print_friendly_greeting
+        puts "Hi #{@name} who is #{@age} years old!"
+    end
+
+    def first_initial
+        @name.chars.first
+    end
+
+    def ask_user_about_nickname
+
+        answer = ask_user?("Do you mind if I call you #{first_initial} (yes or no)?")
+        if answer
+            puts "Okay, I will not call you that."
+            @nickname = @name
+        else
+            puts "Cool, From now on I will call you #{first_initial}!"
+            @nickname = first_initial
+        end
+    end
+
+    def print_age_based_message
+        if @age < 13
+            puts "You are not yet a teenager"
+        else
+            puts "You are a teenager" unless @age > 19
+            puts "You can legally drink!" if @age >= 21
+        end
+        years = 75 - @age
+        puts "You will be 75 years old in #{years} years."
+    end
+
+    def print_farewell
+        puts "Farewell #{@nickname}!"
     end
 end
 
-def print_age_based_message(user)
-    if user[:age] < 13
-        puts "You are not yet a teenager"
-    else
-        puts "You are a teenager" unless user[:age] > 19
-        puts "You can legally drink!" if user[:age] >= 21
-    end
-    years = 75 - user[:age]
-    puts "You will be 75 years old in #{years} years."
-end
 
 def do_grocery_shopping
     puts "== Let's go grocery shopping! =="
@@ -63,14 +88,11 @@ def do_grocery_shopping
     end
 end
 
-def print_farewell(user)
-    puts "Farewell #{user[:nickname]}!"
-end
-
 print_greeting
-the_user = get_user_info
-print_friendly_greeting(the_user)
-ask_user_about_nickname(the_user)
-print_age_based_message(the_user)
+the_user = User.new(User.get_user_info)
+the_user.print_friendly_greeting
+the_user.ask_user_about_nickname
+the_user.print_age_based_message
+
 do_grocery_shopping
-print_farewell(the_user)
+the_user.print_farewell
