@@ -13,3 +13,4 @@ This is a very talkative robot written in the Ruby language.
 * Permanently changes the user's name to all caps via !
 * Print: Hey <first_name_in_caps>, where are you going!?
 * Print: Yo "Dude", what's up?
+* Do some grocery shopping.
