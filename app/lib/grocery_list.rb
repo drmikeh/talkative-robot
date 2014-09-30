@@ -1,4 +1,4 @@
-require './ask.rb'
+require './lib/ask.rb'
 
 class GroceryList
 

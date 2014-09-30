@@ -1,4 +1,4 @@
-require './ask'
+require './lib/ask'
 
 class User
 

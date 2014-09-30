@@ -1,6 +1,6 @@
-require './ask'
-require './user'
-require './grocery_list'
+require './lib/ask'
+require './lib/user'
+require './lib/grocery_list'
 
 User.print_greeting
 # the_user = User.new(User.get_user_info)
@@ -11,8 +11,8 @@ the_user.ask_user_about_nickname
 the_user.print_age_based_message
 
 groceries = GroceryList.new
-groceries.read("groceries.txt")
+groceries.read("./data/groceries_in.txt")
 groceries.do_shopping
-groceries.write("groceries2.txt")
+groceries.write("./data/groceries_out.txt")
 
 the_user.print_farewell
