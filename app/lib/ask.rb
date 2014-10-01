@@ -1,13 +1,10 @@
 def ask_yes_or_no?(question)
-  answer = ""
-  while answer != "yes" && answer != "no"
+  answer = ''
+  while answer != 'yes' && answer != 'no'
     puts question
     answer = gets.chomp.downcase
-    if answer == "y"
-      answer = "yes"
-    elsif answer == "n"
-      answer = "no"
-    end
+    answer = 'yes' if answer == 'y'
+    answer = 'no'  if answer == 'n'
   end
-  answer == "yes" ? true : false
+  answer == 'yes' ? true : false
 end

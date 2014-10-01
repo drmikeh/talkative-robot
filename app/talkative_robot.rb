@@ -7,8 +7,12 @@ User.print_greeting
 the_user = User.create_user_from_prompts
 
 the_user.print_friendly_greeting
+
+puts the_user.get_teenage_message
+puts the_user.get_legally_drink_message
+puts the_user.get_years_to_75_message
+
 the_user.ask_user_about_nickname
-the_user.print_age_based_message
 
 groceries = GroceryList.new
 groceries.read("./data/groceries_in.txt")
